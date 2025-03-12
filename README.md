@@ -43,3 +43,76 @@ id: Identifier for each product emission record.
 #### Table <mark>'countries'<mark>
 1. **id**: Unique identifier for each country.
 2. **country_name**: The name of the country.
+
+##### 1. Top 10 Product Most To Carbon Emission
+```
+SELECT product_name,   
+       ROUND(AVG(carbon_footprint_pcf),2) AS average_carbon_footprint_pcf
+FROM product_emissions
+GROUP BY  product_name
+ORDER BY average_carbon_footprint_pcf DESC
+LIMIT 10;
+```
+| product_name                                                                                                                       | average_carbon_footprint_pcf | 
+| ---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------: | 
+| Wind Turbine G128 5 Megawats                                                                                                       | 3718044.00                   | 
+| Wind Turbine G132 5 Megawats                                                                                                       | 3276187.00                   | 
+| Wind Turbine G114 2 Megawats                                                                                                       | 1532608.00                   | 
+| Wind Turbine G90 2 Megawats                                                                                                        | 1251625.00                   | 
+| Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.                                                                 | 191687.00                    | 
+| Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall | 167000.00                    | 
+| TCDE                                                                                                                               | 99075.00                     | 
+| Mercedes-Benz GLE (GLE 500 4MATIC)                                                                                                 | 91000.00                     | 
+| Mercedes-Benz S-Class (S 500)                                                                                                      | 85000.00                     | 
+| Mercedes-Benz SL (SL 350)                                                                                                          | 72000.00                     |
+
+##### 2. Top 10's Product Have Most Carbon Emission
+```
+SELECT pe.product_name,ig.industry_group,average_carbon_footprint_pcf
+FROM (
+  SELECT   product_name,
+  		   industry_group_id,
+		   ROUND(AVG(carbon_footprint_pcf),2) AS average_carbon_footprint_pcf
+  FROM 	 product_emissions
+  GROUP BY product_name,industry_group_id
+  ORDER BY average_carbon_footprint_pcf DESC
+  LIMIT 10
+) AS pe
+JOIN industry_groups ig ON ig.id = pe.industry_group_id;
+```
+
+| product_name                                                                                                                       | industry_group                     | average_carbon_footprint_pcf | 
+| ---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------: | ---------------------------: | 
+| Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.                                                                 | Automobiles & Components           | 191687.00                    | 
+| Mercedes-Benz GLE (GLE 500 4MATIC)                                                                                                 | Automobiles & Components           | 91000.00                     | 
+| Mercedes-Benz S-Class (S 500)                                                                                                      | Automobiles & Components           | 85000.00                     | 
+| Mercedes-Benz SL (SL 350)                                                                                                          | Automobiles & Components           | 72000.00                     | 
+| Wind Turbine G128 5 Megawats                                                                                                       | Electrical Equipment and Machinery | 3718044.00                   | 
+| Wind Turbine G132 5 Megawats                                                                                                       | Electrical Equipment and Machinery | 3276187.00                   | 
+| Wind Turbine G114 2 Megawats                                                                                                       | Electrical Equipment and Machinery | 1532608.00                   | 
+| Wind Turbine G90 2 Megawats                                                                                                        | Electrical Equipment and Machinery | 1251625.00                   | 
+| Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall | Materials                          | 167000.00                    | 
+| TCDE                                                                                                                               | Materials                          | 99075.00                     | 
+##### 3.Top 10's Industry Group Have Most Carbon Emission
+```
+ SELECT ig.industry_group,SUM(carbon_footprint_pcf) total_emission
+FROM product_emissions pe
+JOIN industry_groups ig ON ig.id = pe.industry_group_id
+GROUP BY ig.industry_group
+ORDER BY total_emission DESC
+LIMIT 10;
+```
+| industry_group                                   | total_emission | 
+| -----------------------------------------------: | -------------: | 
+| Electrical Equipment and Machinery               | 9801558        | 
+| Automobiles & Components                         | 2582264        | 
+| Materials                                        | 577595         | 
+| Technology Hardware & Equipment                  | 363776         | 
+| Capital Goods                                    | 258712         | 
+| "Food, Beverage & Tobacco"                       | 111131         | 
+| "Pharmaceuticals, Biotechnology & Life Sciences" | 72486          | 
+| Chemicals                                        | 62369          | 
+| Software & Services                              | 46544          | 
+| Media                                            | 23017          | 
+ 
+####  4.
