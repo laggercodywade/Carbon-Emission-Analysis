@@ -20,25 +20,25 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 ### Tables' columns description
 #### Table <mark>product_emissions</mark>
 id: Identifier for each product emission record.
-**company_id**: Identifier for the company associated with the product.
+1. **company_id**: Identifier for the company associated with the product.
 
-**country_id**: Identifier for the country where the product is being produced.
+2. **country_id**: Identifier for the country where the product is being produced.
 
-**industry_group_id**: Identifier for the industry group to which the product belongs.
+3. **industry_group_id**: Identifier for the industry group to which the product belongs.
 
-**year**: The year in which the emissions data was recorded.
+4. **year**: The year in which the emissions data was recorded.
 
-**product_name**: The name of the product associated with the emissions data.
+5. **product_name**: The name of the product associated with the emissions data.
 
-**weight_kg**: The weight of the product in kilograms.
+6. **weight_kg**: The weight of the product in kilograms.
 
-**carbon_footprint_pcf**: The carbon footprint of the product, measured in CO2 equivalent.
+7. **carbon_footprint_pcf**: The carbon footprint of the product, measured in CO2 equivalent.
 
-**upstream_percent_total_pcf**: The percentage of the total carbon footprint attributed to upstream activities.
+8. **upstream_percent_total_pcf**: The percentage of the total carbon footprint attributed to upstream activities.
 
-**operations_percent_total_pcf**: The percentage of the total carbon footprint attributed to operations.
+9. **operations_percent_total_pcf**: The percentage of the total carbon footprint attributed to operations.
 
-**downstream_percent_total_pcf**: The percentage of the total carbon footprint attributed to downstream activities.
+10. **downstream_percent_total_pcf**: The percentage of the total carbon footprint attributed to downstream activities.
 
 #### Table <mark>'industry_groups'<mark>
 1. **id**: Unique identifier for each industry group.
