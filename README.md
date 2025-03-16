@@ -21,14 +21,23 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 #### Table <mark>product_emissions</mark>
 id: Identifier for each product emission record.
 **company_id**: Identifier for the company associated with the product.
+
 **country_id**: Identifier for the country where the product is being produced.
+
 **industry_group_id**: Identifier for the industry group to which the product belongs.
+
 **year**: The year in which the emissions data was recorded.
+
 **product_name**: The name of the product associated with the emissions data.
+
 **weight_kg**: The weight of the product in kilograms.
+
 **carbon_footprint_pcf**: The carbon footprint of the product, measured in CO2 equivalent.
+
 **upstream_percent_total_pcf**: The percentage of the total carbon footprint attributed to upstream activities.
+
 **operations_percent_total_pcf**: The percentage of the total carbon footprint attributed to operations.
+
 **downstream_percent_total_pcf**: The percentage of the total carbon footprint attributed to downstream activities.
 
 #### Table <mark>'industry_groups'<mark>
@@ -80,6 +89,7 @@ FROM (
   LIMIT 10
 ) AS pe
 JOIN industry_groups ig ON ig.id = pe.industry_group_id;
+
 ```
 
 | product_name                                                                                                                       | industry_group                     | average_carbon_footprint_pcf | 
@@ -102,6 +112,7 @@ JOIN industry_groups ig ON ig.id = pe.industry_group_id
 GROUP BY ig.industry_group
 ORDER BY total_emission DESC
 LIMIT 10;
+
 ```
 | industry_group                                   | total_emission | 
 | -----------------------------------------------: | -------------: | 
